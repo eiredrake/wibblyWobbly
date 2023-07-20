@@ -1,0 +1,22 @@
+{% load static %}
+{% block title %}{% endblock title %}
+
+{% block content %}
+    <div class="container-fluid no-padding">
+        {% if search_terms|length > 0 %}
+            {% if all_thingies_found|length > 0 %}
+                {% if all_thingies_found|length > 0 %}
+                    {% block thingies %}
+                        {% include 'thingie_list.html' with all_thingies_found=all_thingies_found %}
+                    {% endblock thingies %}
+                {% endif %}
+            {% else %}
+                <a href="{% url 'index' %}">Back to Search</a>
+                <h1>Sorry, We did not find any thingies matching your search terms</h1>
+                <h3>search terms: '{{ search_terms }}'</h3>
+            {% endif %}
+        {% else %}
+            <h1>You did not enter any search terms</h1>
+        {% endif %}
+    </div>
+{% endblock content %}

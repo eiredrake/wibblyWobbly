@@ -1,0 +1,48 @@
+{% load static %}
+{% block content %}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+<a href="{% url 'index' %}">Back to Search</a>
+
+<div class="container-fluid accordion no-padding" id="accordionExample">
+	<div class="card" style="width: 100%;">
+		<div class="card-header necrotopia-main-content-2" id="rules_heading">
+		  <h5 class="mb-0 collapsible-header">
+		  </h5>
+		</div>
+        <H1>Thingies</H1>
+
+		<div id="collapse_rule" class="collapse show" aria-labelledby="rules_heading" data-parent="#accordionExample">
+		  <div class="card-body necrotopia-main-content-2">
+			<div class="mercantile-table-block-light no-padding">
+				<div class="col-lg">
+					<table class="table table-striped table-bordered table-hover">
+                        <caption>{{ all_thingies_found|length }} thingies found.</caption>
+						<thead>
+							<tr>
+								<th>Thingie</th>
+								<th>Creator</th>
+                                <th>Description</th>
+                                <th>Tags</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for thingie in all_thingies_found %}
+							<tr>
+                                <td><a class="btn-link" href="{% url "thingie_view" thingie_id=thingie.id %}">{{ thingie.name }}</a></td>
+                                <td>{{ thingie.creator }}</td>
+                                <td>{{ thingie.description|truncatechars:20 }}</td>
+                                <td>{{ thingie.tags }}</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	</div>
+</div>
+{% endblock content %}
